@@ -20,6 +20,11 @@ This is how the Genetic Algorithm looks like, when it is applied only in the noi
 
 ![image info](./images/result.gif)
 
+In comparision, this is how looks the denoise process using the __Median Filter Process__:
+
+![image info](./images/lena_medianfilter_denoised.png)
+
+At first sight, it is visible that the __Median Filter__ blurs the image, while the GA does not. But, the GA does not detects all noisy pixels.
 
 ## Image Denoising Problem
 
@@ -174,10 +179,7 @@ FUNC mutant_creator()
 ENDFUNC
 ```
 
-## Implementation
-```
 
-```
 ## Results
 ![image info](./images/result.gif)
 ![image info](./images/lena.jpg)
