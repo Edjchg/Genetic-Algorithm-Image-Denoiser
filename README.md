@@ -10,6 +10,17 @@ This article will address the following topics:
 - Implementation.
 - Results.
 
+__Summary:__
+
+This is the original Lena image (Well known image in the field of Image Processing) with __Salt & Pepper noise__:
+
+![image info](./images/lena_salt_pepper_noised.png)
+
+This is how the Genetic Algorithm looks like, when it is applied only in the noisy pixels:
+
+![image info](./images/result.gif)
+
+
 ## Image Denoising Problem
 
 There are some theoretical approaches to manipulate images. One of them is related to apply mathematical operations over images, this is known as Image Processing. For sharpening, denoising, introducing noise and analize images, there are a concepts called __kernel__, __convolution__, and statistical concepts such as __mean__, __standard deviation__ and other terms that are required to be able to successfully analize images.
@@ -135,9 +146,9 @@ FUNC crossover(parent_1, parent 2)
         boolean is_parent_1 := random_choice(parent_1_list)
 
         IF is_parent_1 = True THEN
-            child_genes[child_index] = parent_1[child_index]
+            child_genes[child_index] := parent_1[child_index]
         ELSE
-            child_genes[child_index] = parent_2[child_index]
+            child_genes[child_index] := parent_2[child_index]
         ENDIF
     ENDFOR
 
@@ -146,7 +157,22 @@ ENDFUNC
 ```
 
 5. Mutation operator
-6. 
+
+This process is the way the GA can preserve diversity over generations. In this case, knowing the images that are taking into consideration are normalized, which means that each Pixel's channel are in the range of $\left[0:256\right[$, then the process of introducing mutants will be doing a random choice in between this range of values for each __RGB__ channel. Something like the following pseudocode:
+
+```
+list posible_channel_vals := [0, 1, 2, 3, ..., 255]
+
+FUNC mutant_creator()
+    tuple mutant_gene := (0, 0, 0)
+
+    mutant_gene[R_INDEX] := random_choice(posible_channel_vals)
+    mutant_gene[G_INDEX] := random_choice(posible_channel_vals)
+    mutant_gene[B_INDEX] := random_choice(posible_channel_vals)
+
+    RETURN mutant_gene
+ENDFUNC
+```
 
 ## Implementation
 ```
