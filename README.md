@@ -199,16 +199,17 @@ From left to right, the mutant efect is exemplified, being visible that reducing
 ![image info](./images/nbh_5x5_m_10pcnt.png)
 ![image info](./images/nbh_5x5_m_5pcnt.png)
 
-Seen advantages of the __Median Filter__ over the GA:
 
-- It takes 10x less than GA to finish processing an image.
-- Cleans all the noisy pixels.
-- Deterministic, allways throw the same result.
-- The performance is static since all the resources are known and straight to improve.
+Seen advantages of the __GA__ over the __Median Filter__:
 
-Seen disadvantages of the __Median Filter__ compared to GA:
+- Does not blur the image.
+- It works for a bunch of sorts of noise, those over the pixels are clearly detected as out of the "normal".
+- It is agnostic to any __convolution__ operation, specific __kernel__ filter, or mathematical operation inherent in __Image Processing__. It learns how to denoise an image.
+- It applies the process only in the noisy pixels, and not over the entire the image.
 
-- Blurs the image.
-- It works only for __Salt & Pepper noise__, while GA works for other sorts of noise.
-- Applies the convolution for all the pixels, not only the noisy ones.
-- 
+Seen disadvantages of the __GA__ over the __Median Filter__:
+
+- Takes 10x more time than the deterministic form of solving the problem.
+- It is not deterministic, which means every run will be different, and could take more/less time in each iteration.
+- The resources and performance are not known before executing it, could vary depending on the image noise percentage, noise type, random seed, and image size.
+- It has more empiric paramters that could be modified to get better results, but is an unknown field that should be studied deeper.
