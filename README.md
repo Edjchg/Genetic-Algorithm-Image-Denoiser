@@ -39,7 +39,51 @@ Some of the types of noise are the following:
 The idea of denoising these images, is to get rid of the pixels that makes the image not fully clear.
 
 ## Genetic Algorithm concepts applied to Image Denoising Problem
+
+This section will talk about the concepts of Genetic Algorithms and how they are interpreted in this specific implementation.
+
+1. Individual
+
+For this case, and individual is a pixel already identified as noisy. The way it is determined is by calculating the __Deviation Coefficient__ (__Z__ in statistics terms). How much the pixel is away from the mean? That is the question the algorithm wants to answer before applying the GA over it. Basically, if __|Z| > 2__, then the pixel is considered as noisy.
+
+Refreshing on how the __Deviation Coefficient__ is calculated, and how it is calculated for a RGB pixel:
+
+
+Assuming we have a Population of pixels __x__:
+
+$$
+population = \{x_1, x_2, x_3, ..., x_n\}
+$$
+
+First step is to get the mean from the population:
+$$
+mean = \mu = \frac{\sum_{i=0}^n x_i}{n}
+$$
+
+Then, the __Standard Deviation__:
+
+$$
+\sigma = \sqrt{\frac{\sum_{i=0}^n \left(x_i - \mu\right)^2}{n}}
+$$
+
+Finally, to calculate the __Deviation Coefficient__ of the pixel $x_i$:
+
+$$
+Z = \frac{x_i - mean}{\sigma} 
+$$
+
+Then, a pixel is noisy if $|Z\left(x_i\right)| > 2$.
+
+2. Gene
+3. Selection
+4. Crossover operator
+5. Mutation operator
+6. 
+
 ## Implementation
+```
+
+```
 ## Results
 ![image info](./images/result.gif)
 ![image info](./images/lena.jpg)
