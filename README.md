@@ -76,8 +76,75 @@ $$
 Then, a pixel is noisy if $|Z\left(x_i\right)| > 2$.
 
 2. Gene
+
+For this particular case, a gene of the individual matches with the RGB channel values of a Pixel. The image could seen as a matrix o __MxN__, each cell is considered as a Pixel, and each Pixel is a tuple of $\left(R,G,B\right)$ values for each color channel. So this tuple is the gene.
+
+The shape of the images we are taking for this problem will be in the shape of $\left(M, N, 3\right)$, which __M__ represents the number columns, __N__ the number of rows and 3 is the number of channels of each pixel.
+
 3. Selection
+
+The rules for creating the new population for a certain generation are the following:
+    
+- The initial population is conformed by the neighborhood of the pixel, which is a matrix of 5x5 pixels around the pixel being evaluated:
+
+$$
+\begin{matrix}
+0 & 0 & 0 &  0 & 0 \\
+0 & 0 & 0 &  0 & 0 \\
+0 & 0 & x_i& 0 & 0 \\
+0 & 0 & 0 &  0 & 0 \\
+0 & 0 & 0 &  0 & 0
+\end{matrix}
+$$
+
+If the routine is evaluating an edge pixel where some of the initial neighbors are going to be missing, then adding mutant pixels.
+
+- In further generations, the 20% of the best individuals will be bypassed to the next generation.
+
+- Also, the GA will do a crossover between the pixels of the best 50% of the individuals of the last generation, to create the 70% of the next generation.
+
+- And for the last 10%, mutant pixels are going to be added to preserve diversity among the offspring.
+
 4. Crossover operator
+
+Since the genes of each parent are only a tuple of $\left(R,G,B\right)$, then the process of crossing over the genes is the following:
+
+Parent 1:
+
+| $PR_1$ | $PG_1$ | $PB_1$ |
+|--------|--------|--------|
+
+Parent 2:
+
+| $PR_2$ | $PG_2$ | $PB_2$ |
+|--------|--------|--------|
+
+Where __P__ stands for Parent, and __R__, __G__, __B__ stands for Red, Green and Blue.
+
+How the Algorithm selects and mixes genes from Parent 1 and 2?
+
+Doing a random choice (going deeper in further sections) between Parent 1 and Parent 1 for each channel and determining the child genes. Something like the following pseudocode:
+
+```
+FUNC crossover(parent_1, parent 2)
+    list child_genes := (0, 0, 0)
+
+    FOR channel_index IN RANGE child_genes:
+        list parent_1_list := [True, False]
+
+        boolean is_parent_1 := random_choice(parent_1_list)
+
+        IF is_parent_1 = True THEN
+            child_genes[child_index] = parent_1[child_index]
+        ELSE
+            child_genes[child_index] = parent_2[child_index]
+        ENDIF
+    ENDFOR
+
+    RETURN child_genes
+ENDFUNC
+```
+
 5. Mutation operator
 6. 
 
