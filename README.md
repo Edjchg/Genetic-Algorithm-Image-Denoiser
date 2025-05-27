@@ -56,6 +56,7 @@ population = \{x_1, x_2, x_3, ..., x_n\}
 $$
 
 First step is to get the mean from the population:
+
 $$
 mean = \mu = \frac{\sum_{i=0}^n x_i}{n}
 $$
