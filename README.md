@@ -181,5 +181,34 @@ ENDFUNC
 
 
 ## Results
-![image info](./images/result.gif)
-![image info](./images/lena.jpg)
+
+Here is the result of denoising the same image with 2 different methods. The first image shows the result of the Genetic Algorithm. To solve this image, it takes around 10 [s]. On the other hand, the __Median Filter__ takes around 1 [s].
+
+![image info](./images/test.png)
+![image info](./images/lena_medianfilter_denoised.png)
+
+In the process of adjusting the Algorithm parameters, it was clear the direct effect of the mutant genes on the final result. The following 3 images show how the percentage of mutants adds more noise to the final image, so adjust this parameter allows the algorithm to avoid getting stuck at a false minimum, but enough mutants allows the routine to converge to a final fittest individual. 
+
+For this original noised image of a man:
+
+![image info](./images/men_already_noise.png)
+
+From left to right, the mutant efect is exemplified, being visible that reducing but not getting rid of the mutants helps the GA to converge and provide a better result: 
+
+![image info](./images/nbh_5x5_m_20pcnt.png)
+![image info](./images/nbh_5x5_m_10pcnt.png)
+![image info](./images/nbh_5x5_m_5pcnt.png)
+
+Seen advantages of the __Median Filter__ over the GA:
+
+- It takes 10x less than GA to finish processing an image.
+- Cleans all the noisy pixels.
+- Deterministic, allways throw the same result.
+- The performance is static since all the resources are known and straight to improve.
+
+Seen disadvantages of the __Median Filter__ compared to GA:
+
+- Blurs the image.
+- It works only for __Salt & Pepper noise__, while GA works for other sorts of noise.
+- Applies the convolution for all the pixels, not only the noisy ones.
+- 
